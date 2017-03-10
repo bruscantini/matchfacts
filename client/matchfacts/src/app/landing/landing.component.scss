@@ -1,6 +1,8 @@
 body {
   background-image: url("http://www.lanlinglaurel.com/data/out/184/5611903-basketball-wallpaper-hd.jpg");
   background-color: blue;
+  background-position: center;
+  background-size: cover;
 }
 
 #full-page {
@@ -8,10 +10,13 @@ body {
   background: -o-linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20)), url("../../assets/basketball-background-1.jpg");
   background: linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20)), url("../../assets/basketball-background-1.jpg");
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
+
 @media (max-width: 991px) {
   #full-page {
-    background-position: -5vw -27vh;
+    background-position: 0 -27vh;
   }
 }
 

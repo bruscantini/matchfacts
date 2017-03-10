@@ -1,8 +1,18 @@
-@font-face {
-  font-family: 'euronism_b';
-  src: url('../../assets/euronism/D3Euronism_b.ttf');
+#comparison-full-page {
+  background: url("../../assets/basketball-background-13.jpg");
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  color: white;
 }
 
-body {
-  background: "http://hd-wall-papers.com/images/wallpapers/basketball-background-wallpaper/basketball-background-wallpaper-13.jpg";
+.vs-col {
+}
+
+#vs-img {
+  width: 100%;
+}
+
+input {
+  width: 75%;
 }
