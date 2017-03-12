@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+var path = require('path');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+module.exports = function(app) {
 
-module.exports = router;
+    app.use('/api/player', require('../api/player'));
+
+    // catch 404 and forward to Angular
+    app.all('/*', function(req, res) {
+        res.sendfile(__dirname + '/public/index.html');
+    });
+};

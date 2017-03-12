@@ -12,6 +12,7 @@ import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { ComparisonComponent } from './comparison/comparison.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NbaAPIService } from './shared/nba-api.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     { provide: 'BASE_ENDPOINT', useValue: environment.baseEndpoint },
-    { provide: 'API_ENDPOINT', useValue: environment.apiEndpoint }
+    { provide: 'API_ENDPOINT', useValue: environment.apiEndpoint },
+    NbaAPIService
   ],
   bootstrap: [AppComponent]
 })
