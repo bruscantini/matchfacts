@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbaAPIService } from '../shared/nba-api.service';
 
 @Component({
   selector: 'app-comparison',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComparisonComponent implements OnInit {
   statFields: String[];
+  // allPlayers: Object[];
+  // allPlayersNames: Object[];
 
-  constructor() {
+  constructor(private nbaAPIService: NbaAPIService) {
     this.statFields = [
       'gp',
       'gs',
@@ -35,6 +38,7 @@ export class ComparisonComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

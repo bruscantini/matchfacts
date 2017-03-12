@@ -10,11 +10,15 @@ import 'rxjs/add/operator/catch';
 export class NbaAPIService {
 
   apiEndpoint = 'http://localhost:3000/api/player/';
-  //players: Object[];
+  allPlayers: Object[];
 
   constructor(private http: Http) { }
 
-  getPlayers(): Observable<Object> {
+  getPlayers(): Observable<Array<Object>> {
+    // if (this.allPlayers) return new Observable((observer) => {
+    //   observer.next(this.allPlayers);
+    //   observer.complete();
+    // });
     return this.http.get(this.apiEndpoint)
       .map(this.extractData).catch(this.handleError);
   }
@@ -29,8 +33,8 @@ export class NbaAPIService {
   }
 
   extractData(resp: Response) {
-    console.log(resp.json());
-    //return resp.json();
+    //console.log(resp.json());
+    return resp.json();
   }
 
   handleError(error: Response | any) {

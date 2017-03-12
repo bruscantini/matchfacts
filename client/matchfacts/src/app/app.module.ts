@@ -13,6 +13,7 @@ import { ComparisonComponent } from './comparison/comparison.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NbaAPIService } from './shared/nba-api.service';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    Ng2AutoCompleteModule
   ],
   providers: [
     { provide: 'BASE_ENDPOINT', useValue: environment.baseEndpoint },
