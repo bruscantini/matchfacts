@@ -11,6 +11,7 @@ export class PlayerComponent implements OnInit {
   @Input() player: Player;
   @Output() onSeasonSelected: EventEmitter<Object> = new EventEmitter<Object>();
   searchedPlayer: string;
+  searchedPlayerId: string;
   allPlayers: Object[] = [];
 
   constructor(private nbaAPIService: NbaAPIService) {
@@ -53,6 +54,23 @@ export class PlayerComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  searchValueFormatter = (data: any) => {
+    this.searchedPlayerId = data['id'];
+    return `${data['value']}`;
+  }
+
+  myListFormatter = (data: any): string => {
+    //console.log(data);
+    let html: string = "";
+    html += data['value'] ? `<span>${data['value']}</span>` : data;
+    return html;
+  }
+
+  itemIsSelected(event) {
+    console.log(this.searchedPlayerId + ' is the selected id!');
+    // let's change a variable so app-stats refreshes.
   }
 
 
