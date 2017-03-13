@@ -9,6 +9,8 @@ import { NbaAPIService } from '../shared/nba-api.service';
 })
 export class PlayerComponent implements OnInit {
   @Input() playerId: number;
+  searchedPlayer: String;
+  allPlayers: Object[];
   player: Player;
   player1: Player;
   player2: Player;
@@ -24,19 +26,22 @@ export class PlayerComponent implements OnInit {
     if (this.playerId === 1) this.player = this.player1;
     else this.player = this.player2;
 
-    /*
+
     this.nbaAPIService.getPlayers().subscribe((allPlayers) => {
       console.log(allPlayers);
+      this.allPlayers = allPlayers.map((elem) => {
+        return { id: elem['playerId'], value: elem['firstName'] + ' ' + elem['lastName'] };
+      });
     }, (error) => {
       console.log(error);
     });
-    */
 
-    this.nbaAPIService.getPlayerProfile('893').subscribe((playerProfile) => {
-      console.log(playerProfile);
-    }, (error) => {
-      console.log(error);
-    })
+
+    // this.nbaAPIService.getPlayerProfile('893').subscribe((playerProfile) => {
+    //   console.log(playerProfile);
+    // }, (error) => {
+    //   console.log(error);
+    // })
   }
 
 }
