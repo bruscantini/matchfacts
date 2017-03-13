@@ -11,6 +11,9 @@ const playerSchema = mongoose.Schema({
     lastName: {
         type: String
     },
+    fullName: {
+        type: String
+    },
     teamId: {
         type: String
     },
@@ -18,7 +21,21 @@ const playerSchema = mongoose.Schema({
         type: String
     }
 
+
+}, {
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
 });
+// playerSchema.virtual('fullName').get(function() {
+//     return this.firstName + ' ' + this.lastName;
+// });
+// playerSchema.index({
+//     fullName: 'text'
+// });
 
 const Player = mongoose.model('Player', playerSchema);
 module.exports = Player;

@@ -1,5 +1,8 @@
 #comparison-full-page {
-  background: url("../../assets/basketball-background-13.jpg");
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("../../assets/basketball-background-13.jpg");
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("../../assets/basketball-background-13.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("../../assets/basketball-background-13.jpg");
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   text-align: center;

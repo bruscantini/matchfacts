@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Player } from './player.model';
 import { NbaAPIService } from '../shared/nba-api.service';
 
@@ -8,40 +8,52 @@ import { NbaAPIService } from '../shared/nba-api.service';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  @Input() playerId: number;
-  searchedPlayer: String;
-  allPlayers: Object[];
-  player: Player;
-  player1: Player;
-  player2: Player;
+  @Input() player: Player;
+  @Output() onSeasonSelected: EventEmitter<Object> = new EventEmitter<Object>();
+  searchedPlayer: string;
+  allPlayers: Object[] = [];
 
   constructor(private nbaAPIService: NbaAPIService) {
-    this.player1 = new Player('Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
-    this.player2 = new Player('Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
+
 
   }
 
   ngOnInit() {
-    console.log('playerId ', this.playerId);
-    if (this.playerId === 1) this.player = this.player1;
-    else this.player = this.player2;
 
-
-    this.nbaAPIService.getPlayers().subscribe((allPlayers) => {
-      console.log(allPlayers);
-      this.allPlayers = allPlayers.map((elem) => {
-        return { id: elem['playerId'], value: elem['firstName'] + ' ' + elem['lastName'] };
-      });
+    this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
+      this.player.stats = playerProfile;
+      //console.log(playerProfile);
     }, (error) => {
       console.log(error);
-    });
+    })
 
-
-    // this.nbaAPIService.getPlayerProfile('893').subscribe((playerProfile) => {
-    //   console.log(playerProfile);
+    // this.nbaAPIService.getAllPlayers().subscribe((allPlayers) => {
+    //   console.log(allPlayers);
+    //   this.allPlayers = allPlayers.map((elem) => {
+    //     return { id: elem['playerId'], value: elem['fullName'] };
+    //   });
     // }, (error) => {
     //   console.log(error);
-    // })
+    // });
   }
+
+  getSearchedPlayers() {
+    return this.nbaAPIService.getSearchedPlayers(this.searchedPlayer);
+  }
+
+  // use (ngModelChange)="onSearchChange($event)"
+  onSearchChange() {
+    if (this.searchedPlayer) {
+      this.nbaAPIService.getSearchedPlayers(this.searchedPlayer).subscribe((allPlayers) => {
+        console.log(allPlayers);
+        this.allPlayers = allPlayers.map((elem) => {
+          return { id: elem['playerId'], value: elem['fullName'] };
+        });
+      }, (error) => {
+        console.log(error);
+      });
+    }
+  }
+
 
 }

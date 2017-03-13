@@ -64,6 +64,7 @@ function doAllPromises(playerPromises, continueFrom) {
                 playerId: elem.v.commonPlayerInfo[0].personId,
                 firstName: elem.v.commonPlayerInfo[0].firstName,
                 lastName: elem.v.commonPlayerInfo[0].lastName,
+                fullName: elem.v.commonPlayerInfo[0].firstName + ' ' + elem.v.commonPlayerInfo[0].lastName
 
             };
             player.picture = `http://stats.nba.com/media/players/230x185/${player.playerId}.png`;
@@ -97,10 +98,9 @@ function doAllPromises(playerPromises, continueFrom) {
 }
 
 // should be upto 2147483647
-// lets try 3147483
 function doTheLoop(startFrom) {
     console.log("we are now at " + startFrom);
-    for (let i = startFrom; i < startFrom + 100; ++i) {
+    for (let i = startFrom; i < startFrom + 500; ++i) {
         console.log(i);
         allPlayerPromises.push(NBA.stats.playerInfo({
             PlayerID: i
@@ -109,13 +109,11 @@ function doTheLoop(startFrom) {
             doAllPromises(allPlayerPromises);
             break;
         }
-        if (i === startFrom + 99) {
-            doAllPromises(allPlayerPromises, startFrom + 100);
+        if (i === startFrom + 499) {
+            doAllPromises(allPlayerPromises, startFrom + 500);
             break;
         }
     }
 
 }
-
-
-doTheLoop(155601);
+doTheLoop(575601);

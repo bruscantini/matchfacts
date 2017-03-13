@@ -14,20 +14,29 @@ export class NbaAPIService {
 
   constructor(private http: Http) { }
 
-  getPlayers(): Observable<Array<Object>> {
-    // if (this.allPlayers) return new Observable((observer) => {
-    //   observer.next(this.allPlayers);
-    //   observer.complete();
-    // });
+  getAllPlayers(): Observable<Array<Object>> {
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers});
     return this.http.get(this.apiEndpoint)
       .map(this.extractData).catch(this.handleError);
+  }
+
+  getSearchedPlayers(searchedPlayer: string): Observable<Array<Object>> {
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers, body: JSON.stringify(searchedPlayer) });
+    return this.http.get(this.apiEndpoint + 'searchedPlayer/' + searchedPlayer)
+      .map(this.extractData).map((obj) => {
+        return obj.map((elem) => {
+          return { id: elem.playerId, value: elem.fullName };
+        });
+      }).catch(this.handleError);
   }
 
   getPlayerProfile(playerId: string): Observable<Object> {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     // let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.apiEndpoint + playerId)
+    return this.http.get(this.apiEndpoint + 'profile/' + playerId)
       .map(this.extractData).catch(this.handleError);
 
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbaAPIService } from '../shared/nba-api.service';
+import { Player } from '../player/player.model';
 
 @Component({
   selector: 'app-comparison',
@@ -8,8 +9,10 @@ import { NbaAPIService } from '../shared/nba-api.service';
 })
 export class ComparisonComponent implements OnInit {
   statFields: String[];
-  // allPlayers: Object[];
-  // allPlayersNames: Object[];
+  player1: Object;
+  player2: Object;
+  player1Data: Object;
+  player2Data: Object;
 
   constructor(private nbaAPIService: NbaAPIService) {
     this.statFields = [
@@ -35,6 +38,9 @@ export class ComparisonComponent implements OnInit {
       'pf',
       'pts'
     ].reverse();
+
+    this.player1 = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
+    this.player2 = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
   }
 
   ngOnInit() {

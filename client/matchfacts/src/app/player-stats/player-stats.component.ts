@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-player-stats',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-stats.component.scss']
 })
 export class PlayerStatsComponent implements OnInit {
-
+  @Input() stats: Object;
   constructor() { }
 
   ngOnInit() {
