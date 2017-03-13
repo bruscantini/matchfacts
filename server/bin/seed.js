@@ -70,18 +70,27 @@ function doAllPromises(playerPromises, continueFrom) {
             players.push(player);
         });
 
+        if (players && players.length > 0) {
+            Player.create(players, (err, docs) => {
+                if (err) console.log(err);
+                console.log(docs.length + ' players put in DB!');
+                players = [];
+                if (continueFrom && typeof continueFrom !== 'undefined') {
+                    doTheLoop(continueFrom);
+                } else {
+                    mongoose.connection.close();
+                }
 
-        Player.create(players, (err, docs) => {
-            if (err) console.log(err);
-            console.log(docs.length + ' players put in DB!');
+            });
+        } else {
+            console.log('no players');
             players = [];
             if (continueFrom && typeof continueFrom !== 'undefined') {
                 doTheLoop(continueFrom);
             } else {
                 mongoose.connection.close();
             }
-
-        });
+        }
 
 
     });
@@ -92,11 +101,15 @@ function doAllPromises(playerPromises, continueFrom) {
 function doTheLoop(startFrom) {
     console.log("we are now at " + startFrom);
     for (let i = startFrom; i < startFrom + 100; ++i) {
-
+        console.log(i);
         allPlayerPromises.push(NBA.stats.playerInfo({
             PlayerID: i
         }));
-        if (i === 1000 || i === startFrom + 99) {
+        if (i === 3000000) {
+            doAllPromises(allPlayerPromises);
+            break;
+        }
+        if (i === startFrom + 99) {
             doAllPromises(allPlayerPromises, startFrom + 100);
             break;
         }
@@ -105,4 +118,4 @@ function doTheLoop(startFrom) {
 }
 
 
-doTheLoop(1);
+doTheLoop(155601);
