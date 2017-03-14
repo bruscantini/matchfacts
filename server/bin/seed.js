@@ -117,23 +117,34 @@ function doTheLoop(startFrom) {
 
 }
 
-// Player.find({}, (err, players) => {
-//     players.forEach((player) => {
-//         NBA.stats.playerInfo({
-//             'PlayerID': player.playerId
-//         }).then((playerObj) => {
-//             let number = playerObj.commonPlayerInfo[0].jersey;
-//             console.log('jersey for ' + player.fullName + 'is: ' + number);
-//         }).catch((err) => {
-//             console.log(err);
-//         });
-//     });
-//
-//     setTimeout(() => {
-//         console.log('closing mongoose');
-//         mongoose.connection.close();
-//     }, 10000);
-// });
+function successJersey(playerObj) {
+    let number = playerObj.commonPlayerInfo[0].jersey;
+    console.log('jersey for ' + player.fullName + 'is: ' + number);
+}
+
+function failJersey(err) {
+    console.log(err);
+}
+
+function doJersey(players, start, end) {
+    getJerseys(players, start + 100, end);
+}
+
+function getJerseys(players, start, end) {
+    for (let i = start; i < end; ++i) {
+        if (i === start + 100) {
+            setTimeout(doJersey(players, start, end), 10000);
+            break;
+        }
+        NBA.stats.playerInfo({
+            'PlayerID': players[i].playerId
+        }).then(successJersey).catch(failJersey);
+    }
+}
+
+Player.find({}, (err, players) => {
+    getJerseys(players, 0, players.length);
+});
 
 
 

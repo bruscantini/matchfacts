@@ -17,7 +17,7 @@
       <app-player-stats [player]="player1" [stats]="player1Data" [statFields]="statFields"></app-player-stats>
     </div>
     <div class="col-xs-2">
-      <h3 *ngFor="let field of statFields ">{{field}}</h3>
+      <div class="stat-field-holder" *ngFor="let field of statFields ">{{field}}</div>
     </div>
     <div class="col-xs-5">
       <app-player-stats [player]="player2" [stats]="player2Data" [statFields]="statFields"></app-player-stats>

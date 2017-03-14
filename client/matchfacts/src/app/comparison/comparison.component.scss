@@ -5,11 +5,23 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  padding-top: 5vh;
   text-align: center;
   color: white;
 }
 
 #vs-img {
-  width: 100%;
-  margin-top: 10vh;
+  width: 60%;
+  margin-top: 100px;
+}
+
+.stat-field-holder {
+  width: auto;
+  height: auto;
+  margin: 1.5vh auto;
+  padding: 1px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 3rem;
+  color: black;
 }
