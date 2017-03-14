@@ -1,6 +1,6 @@
 <input auto-complete [(ngModel)]="searchedPlayer" [min-chars]="1" [source]=" getSearchedPlayers.bind(this) " type="text" auto-complete-placeholder="search player" (valueChanged)="itemIsSelected($event)" class="search-player-input" [list-formatter]="myListFormatter"
     [value-formatter]="searchValueFormatter">
-  <img src="{{player.image}} " alt=" ">
+  <img src="{{player.picture}} " alt=" ">
   <h3>{{player.number}}</h3>
   <h3>{{player.firstName}} {{player.lastName}}</h3>
   <select name="year " id="year-selector "></select>

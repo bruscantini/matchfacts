@@ -23,7 +23,6 @@ export class PlayerStatsComponent implements OnInit {
   @Input() statFields: String[];
   @Input()
   set stats(stats: Object) {
-    console.log('stats have changed!');
     this._stats = stats;
     if (this._stats) {
       this.selectedStats = this._stats['careerTotalsRegularSeason'][0];

@@ -48,6 +48,14 @@ export class ComparisonComponent implements OnInit {
     this.getPlayerProfile(this.player2.playerId);
   }
 
+  onPlayer1DataUpdated(playerData: Object) {
+    this.player1Data = playerData;
+  }
+
+  onPlayer2DataUpdated(playerData: Object) {
+    this.player2Data = playerData;
+  }
+
   getPlayerProfile(id: string) {
     this.nbaAPIService.getPlayerProfile(id).subscribe((playerProfile) => {
       if (this.player1.playerId === id) this.player1Data = playerProfile;
@@ -56,5 +64,7 @@ export class ComparisonComponent implements OnInit {
       console.log(error);
     })
   }
+
+
 
 }

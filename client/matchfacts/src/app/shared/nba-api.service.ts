@@ -41,6 +41,11 @@ export class NbaAPIService {
 
   }
 
+  getPlayer(playerId: string): Observable<Object> {
+    return this.http.get(this.apiEndpoint + 'getPlayer/' + playerId)
+      .map(this.extractData).catch(this.handleError);
+  }
+
   extractData(resp: Response) {
     //console.log(resp.json());
     return resp.json();

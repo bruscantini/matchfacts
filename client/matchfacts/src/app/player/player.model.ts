@@ -5,16 +5,15 @@ export class Player {
   firstName: string;
   lastName: string;
   number: string;
-  image: string;
-  stats: Object;
+  picture: string;
   selectedYear: string;
 
-  constructor(playerId: string, firstName: string, lastName: string, number: string, image: string) {
+  constructor(playerId: string, firstName: string, lastName: string, number: string, picture: string) {
     this.playerId = playerId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.number = number;
-    this.image = image;
+    this.picture = picture;
     this.selectedYear = 'careerTotalsRegularSeason';
   }
 }

@@ -11,6 +11,7 @@ export class PlayerComponent implements OnInit {
   @Input() player: Player;
   @Input() playerData: Object;
   @Output() onSeasonSelected: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() onDataUpdated: EventEmitter<Object> = new EventEmitter<Object>();
   searchedPlayer: string;
   searchedPlayerId: string;
   //allPlayers: Object[] = [];
@@ -50,10 +51,21 @@ export class PlayerComponent implements OnInit {
   }
 
   itemIsSelected(event) {
-    console.log(this.searchedPlayerId + ' is the selected id!');
+    // let's update player - this should repaint the component
+    this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
+      this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
+        basicPlayer['lastName'], '0', basicPlayer['picture']);
+    }, (error) => {
+      console.log('error getting basic player info from our db');
+    });
 
-    // let's change a variable so app-stats refreshes.
-
+    // since update player is working, let's update the stats as well.
+    this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
+      this.onDataUpdated.emit(playerProfile);
+      // this.playerData = playerProfile;
+    }, (error) => {
+      console.log('error getting basic player info from our db');
+    });
   }
 
   // use (ngModelChange)="onSearchChange($event)"
