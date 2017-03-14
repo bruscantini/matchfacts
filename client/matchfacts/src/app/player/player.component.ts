@@ -15,10 +15,14 @@ export class PlayerComponent implements OnInit {
   searchedPlayer: string;
   searchedPlayerId: string;
   //allPlayers: Object[] = [];
+  dataOptGroups: String[];
 
 
   constructor(private nbaAPIService: NbaAPIService) {
-
+    // this.dataOptGroups = [{'id': 'seasonTotalsRegularSeason', value: 'Regular Season'},
+    //   {'id': 'careerTotalsRegularSeason', value: 'Career Reg',
+    //   'seasonTotalsPostSeason',
+    //   'careerTotalsPostSeason']
   }
 
   ngOnInit() {
@@ -31,6 +35,10 @@ export class PlayerComponent implements OnInit {
     //   console.log(error);
     // })
 
+  }
+
+  onYearSelect(selectedValue: string) {
+    console.log(selectedValue + " was selected.");
   }
 
   // Autocomplete uses this Observable.

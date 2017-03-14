@@ -3,4 +3,19 @@
   <img src="{{player.picture}} " alt=" ">
   <h3>{{player.number}}</h3>
   <h3>{{player.firstName}} {{player.lastName}}</h3>
-  <select name="year " id="year-selector "></select>
+  <ng-container *ngIf="playerData">
+    <select name="year " id="year-selector" (change)="onYearSelect($event.target.value)">
+    <option value="" selected>Select year</option>
+    <optgroup label="Career Totals">
+      <option value="careerTotalsRegularSeason 0">Regular Season</option>
+      <option value="careerTotalsPostSeason 0">Post Season</option>
+    </optgroup>
+    <optgroup label="Regular Season">
+      <option *ngFor="let yearData of playerData.seasonTotalsRegularSeason" value="seasonTotalsRegularSeason {{yearData.seasonId}}">{{yearData.seasonId}}</option>
+    </optgroup>
+    <optgroup label="Post Season">
+      <option *ngFor="let yearData of playerData.seasonTotalsPostSeason" value="seasonTotalsPostSeason {{yearData.seasonId}}">{{yearData.seasonId}}</option>
+    </optgroup>
+
+    </select>
+  </ng-container>

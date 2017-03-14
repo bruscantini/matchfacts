@@ -8,6 +8,8 @@
   src: url('./assets/euronism/D3Euronism.ttf');
 }
 
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * {
     padding: 0;
     margin: 0;
@@ -20,7 +22,7 @@ html {
 body {
   font-size: 14px;
   font-size: 2.0rem;
-  font-family: 'euronism', serif;
+  font-family: 'Roboto', 'euronism', sans-serif;
   background-color: black;
 }
 
@@ -40,10 +42,14 @@ h3 {
 }
 
 h1, h2, h3 {
-  font-family: 'euronism_b', serif;
+  font-family: 'Roboto', 'euronism_b', serif;
 }
 
 .ng2-auto-complete > ul li{
   font-size: 1.5vw;
   color:#000;
+}
+
+select {
+  color: black;
 }
