@@ -11,7 +11,7 @@ exports.getPlayers = (req, res, next) => {
     });
 };
 
-exports.getSearchedPlayer = (req, res, next) => {
+exports.getSearchedPlayers = (req, res, next) => {
     var searchedPlayer = req.params.name;
     console.log('get params', searchedPlayer);
     playerModel.find({
@@ -41,4 +41,10 @@ exports.getPlayerProfile = (req, res, next) => {
         console.error(error.stack);
         return next(error);
     });
+};
+
+exports.getPlayerInfo = (req, res, next) => {
+    NBA.stats.playerInfo({
+        PlayerID: req.params.id
+    })
 };

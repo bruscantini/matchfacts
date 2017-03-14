@@ -9,8 +9,8 @@ import { Player } from '../player/player.model';
 })
 export class ComparisonComponent implements OnInit {
   statFields: String[];
-  player1: Object;
-  player2: Object;
+  player1: Player;
+  player2: Player;
   player1Data: Object;
   player2Data: Object;
 
@@ -44,7 +44,17 @@ export class ComparisonComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPlayerProfile(this.player1.playerId);
+    this.getPlayerProfile(this.player2.playerId);
+  }
 
+  getPlayerProfile(id: string) {
+    this.nbaAPIService.getPlayerProfile(id).subscribe((playerProfile) => {
+      if (this.player1.playerId === id) this.player1Data = playerProfile;
+      else this.player2Data = playerProfile;
+    }, (error) => {
+      console.log(error);
+    })
   }
 
 }

@@ -7,6 +7,7 @@ export class Player {
   number: string;
   image: string;
   stats: Object;
+  selectedYear: string;
 
   constructor(playerId: string, firstName: string, lastName: string, number: string, image: string) {
     this.playerId = playerId;
@@ -14,5 +15,6 @@ export class Player {
     this.lastName = lastName;
     this.number = number;
     this.image = image;
+    this.selectedYear = 'careerTotalsRegularSeason';
   }
 }

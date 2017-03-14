@@ -116,4 +116,26 @@ function doTheLoop(startFrom) {
     }
 
 }
-doTheLoop(581101);
+
+// Player.find({}, (err, players) => {
+//     players.forEach((player) => {
+//         NBA.stats.playerInfo({
+//             'PlayerID': player.playerId
+//         }).then((playerObj) => {
+//             let number = playerObj.commonPlayerInfo[0].jersey;
+//             console.log('jersey for ' + player.fullName + 'is: ' + number);
+//         }).catch((err) => {
+//             console.log(err);
+//         });
+//     });
+//
+//     setTimeout(() => {
+//         console.log('closing mongoose');
+//         mongoose.connection.close();
+//     }, 10000);
+// });
+
+
+
+
+doTheLoop(645601);

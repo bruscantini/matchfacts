@@ -5,7 +5,7 @@ var router = express.Router();
 // var playerModel = require('./player.model');
 
 router.get('/', controller.getPlayers);
-router.get('/searchedPlayer/:name', controller.getSearchedPlayer);
+router.get('/searchedPlayer/:name', controller.getSearchedPlayers);
 router.get('/profile/:id', controller.getPlayerProfile);
 
 module.exports = router;
