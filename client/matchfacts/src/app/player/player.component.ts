@@ -29,15 +29,16 @@ export class PlayerComponent implements OnInit {
 
     this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
       this.playerData = playerProfile;
-      // update player data in service
-      this.siblingService.dataChange(this.componentId, playerProfile);
+      this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
     }, (error) => {
       console.log('error getting player profile from nba api');
     });
   }
 
   onYearSelect(selectedValue: string) {
-    this.siblingService.setFilter(this.componentId, selectedValue);
+    // this.siblingService.setFilter(this.componentId, selectedValue);
+    const selectedYear = selectedValue.split(' ');
+    this.siblingService.dataChange(this.componentId, this.playerData[selectedYear[0]][selectedYear[1]]);
   }
 
   // Autocomplete uses this Observable.
@@ -62,16 +63,14 @@ export class PlayerComponent implements OnInit {
     this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
         basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
-      // this.siblingService.playerChange(this.componentId, this.player);
     }, (error) => {
       console.log('error getting basic player info from our db');
     });
 
     // since update player is working, let's update the stats as well.
     this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
-
       this.playerData = playerProfile;
-      this.siblingService.dataChange(this.componentId, playerProfile);
+      this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
     }, (error) => {
       console.log('error getting player profile from nba api');
     });

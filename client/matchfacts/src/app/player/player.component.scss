@@ -8,4 +8,15 @@ img {
   margin: 0 auto;
   color: black;
   font-size: 2vw;
+  text-align: center;
+}
+
+// ng2-auto-complete {
+//   position: relative;
+//   margin: auto;
+// }
+
+ng2-auto-complete-wrapper {
+  position: static;
+  margin: auto;
 }

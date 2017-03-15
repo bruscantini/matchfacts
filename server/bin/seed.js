@@ -118,55 +118,52 @@ function doTheLoop(startFrom) {
 
 }
 
-let thePlayers;
-let currentIndex;
+doTheLoop(988101);
 
-function successJersey(playerObj) {
-    let number = playerObj.commonPlayerInfo[0].jersey;
-    let name = playerObj.commonPlayerInfo[0].displayFiLast;
-    Player.findOneAndUpdate({
-        'playerId': playerObj.commonPlayerInfo[0].personId
-    }, {
-        number
-    }, {
-        new: true
-    }, (err, updatedDoc) => {
-        if (err) {
-            console.log('err when saving to db');
-        }
-        console.log('updated ' + name + "'s number to " + number);
-    });
-}
-
-function failJersey(err) {
-    console.log("error getting jersey", err);
-}
-
-function doJersey() {
-    getJerseys(thePlayers, currentIndex, currentIndex + 100);
-}
-
-function getJerseys(players, start, til) {
-    currentIndex = til;
-    setTimeout(doJersey, 10000);
-    for (let i = start; i < til; ++i) {
-
-        if (i >= thePlayers.length) break;
-        console.log('(' + i + ')');
-
-        NBA.stats.playerInfo({
-            'PlayerID': thePlayers[i].playerId
-        }).then(successJersey).catch(failJersey);
-    }
-}
-
-Player.find({}, (err, players) => {
-    thePlayers = players;
-    currentIndex = 0;
-    getJerseys(thePlayers, 0, 100);
-});
-
-
-
-
-//doTheLoop(977101);
+// let thePlayers;
+// let currentIndex;
+//
+// function successJersey(playerObj) {
+//     let number = playerObj.commonPlayerInfo[0].jersey;
+//     let name = playerObj.commonPlayerInfo[0].displayFiLast;
+//     Player.findOneAndUpdate({
+//         'playerId': playerObj.commonPlayerInfo[0].personId
+//     }, {
+//         number
+//     }, {
+//         new: true
+//     }, (err, updatedDoc) => {
+//         if (err) {
+//             console.log('err when saving to db');
+//         }
+//         console.log('updated ' + name + "'s number to " + number);
+//     });
+// }
+//
+// function failJersey(err) {
+//     console.log("error getting jersey", err);
+// }
+//
+// function doJersey() {
+//     getJerseys(thePlayers, currentIndex, currentIndex + 100);
+// }
+//
+// function getJerseys(players, start, til) {
+//     currentIndex = til;
+//     setTimeout(doJersey, 10000);
+//     for (let i = start; i < til; ++i) {
+//
+//         if (i >= thePlayers.length) break;
+//         console.log('(' + i + ')');
+//
+//         NBA.stats.playerInfo({
+//             'PlayerID': thePlayers[i].playerId
+//         }).then(successJersey).catch(failJersey);
+//     }
+// }
+//
+// Player.find({}, (err, players) => {
+//     thePlayers = players;
+//     currentIndex = 0;
+//     getJerseys(thePlayers, 0, 100);
+// });

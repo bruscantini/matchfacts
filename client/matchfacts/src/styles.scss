@@ -45,6 +45,20 @@ h1, h2, h3 {
   font-family: 'Roboto', 'euronism_b', serif;
 }
 
+ng2-auto-complete {
+  left: 15px;
+}
+
+.ng2-auto-complete-wrapper > ng2-auto-complete {
+  position: relative;
+  margin: auto;
+}
+
+.ng2-auto-complete {
+  position: relative;
+  margin: auto;
+}
+
 .ng2-auto-complete > ul li{
   font-size: 1.5vw;
   color:#000;
