@@ -16,7 +16,7 @@ export class PlayerComponent implements OnInit {
   searchedPlayer: string;
   searchedPlayerId: string;
   //allPlayers: Object[] = [];
-  dataOptGroups: String[];
+  // dataOptGroups: String[];
 
 
   constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
@@ -39,8 +39,8 @@ export class PlayerComponent implements OnInit {
   }
 
   onYearSelect(selectedValue: string) {
-    console.log(selectedValue + " was selected.");
-    this.siblingService.setFilter(selectedValue);
+    console.log(selectedValue + " was selected for playerid " + this.player.playerId);
+    this.siblingService.setFilter({ id: this.player.playerId, value: selectedValue });
   }
 
   // Autocomplete uses this Observable.
@@ -63,8 +63,11 @@ export class PlayerComponent implements OnInit {
   itemIsSelected(event) {
     // let's update player - this should repaint the component
     this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
+      const oldId = this.player.playerId;
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
         basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
+
+      this.siblingService.playerChange({ beforeId: oldId, now: this.player });
     }, (error) => {
       console.log('error getting basic player info from our db');
     });
@@ -72,9 +75,10 @@ export class PlayerComponent implements OnInit {
     // since update player is working, let's update the stats as well.
     this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
       this.onDataUpdated.emit(playerProfile);
-      // this.playerData = playerProfile;
+      // we don't need to update our playerData, parent will do that for us.
+      this.playerData = playerProfile;
     }, (error) => {
-      console.log('error getting basic player info from our db');
+      console.log('error getting player profile from nba api');
     });
   }
 
