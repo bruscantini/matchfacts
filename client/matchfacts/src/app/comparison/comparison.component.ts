@@ -11,10 +11,6 @@ import { SiblingService } from '../shared/sibling.service';
 })
 export class ComparisonComponent implements OnInit {
   statFields: String[];
-  player1: Player;
-  player2: Player;
-  player1Data: Object;
-  player2Data: Object;
 
   constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
     this.statFields = [
@@ -41,32 +37,10 @@ export class ComparisonComponent implements OnInit {
       'pts'
     ].reverse();
 
-    this.player1 = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
-    this.player2 = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
   }
 
   ngOnInit() {
-    this.getPlayerProfile(this.player1.playerId);
-    this.getPlayerProfile(this.player2.playerId);
+
   }
-
-  onPlayer1DataUpdated(playerData: Object) {
-    this.player1Data = playerData;
-  }
-
-  onPlayer2DataUpdated(playerData: Object) {
-    this.player2Data = playerData;
-  }
-
-  getPlayerProfile(id: string) {
-    this.nbaAPIService.getPlayerProfile(id).subscribe((playerProfile) => {
-      if (this.player1.playerId === id) this.player1Data = playerProfile;
-      else this.player2Data = playerProfile;
-    }, (error) => {
-      console.log(error);
-    })
-  }
-
-
 
 }

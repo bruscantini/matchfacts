@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Player } from './player.model';
 import { NbaAPIService } from '../shared/nba-api.service';
 import { SiblingService } from '../shared/sibling.service';
@@ -9,38 +9,35 @@ import { SiblingService } from '../shared/sibling.service';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  @Input() player: Player;
-  @Input() playerData: Object;
-  @Output() onSeasonSelected: EventEmitter<Object> = new EventEmitter<Object>();
-  @Output() onDataUpdated: EventEmitter<Object> = new EventEmitter<Object>();
+  @Input() componentId: number;
+  player: Player;
+  playerData: Object;
   searchedPlayer: string;
   searchedPlayerId: string;
-  //allPlayers: Object[] = [];
-  // dataOptGroups: String[];
-
 
   constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
-    // this.dataOptGroups = [{'id': 'seasonTotalsRegularSeason', value: 'Regular Season'},
-    //   {'id': 'careerTotalsRegularSeason', value: 'Career Reg',
-    //   'seasonTotalsPostSeason',
-    //   'careerTotalsPostSeason']
+
   }
 
   ngOnInit() {
+    if (this.componentId === 1) {
+      this.player = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
 
-    // We're already doing this in comparisonComponent
-    // this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
-    //   this.player.stats = playerProfile;
-    //   console.log('playerStats', this.player.stats);
-    // }, (error) => {
-    //   console.log(error);
-    // })
+    } else {
+      this.player = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
+    }
 
+    this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
+      this.playerData = playerProfile;
+      // update player data in service
+      this.siblingService.dataChange(this.componentId, playerProfile);
+    }, (error) => {
+      console.log('error getting player profile from nba api');
+    });
   }
 
   onYearSelect(selectedValue: string) {
-    console.log(selectedValue + " was selected for playerid " + this.player.playerId);
-    this.siblingService.setFilter({ id: this.player.playerId, value: selectedValue });
+    this.siblingService.setFilter(this.componentId, selectedValue);
   }
 
   // Autocomplete uses this Observable.
@@ -63,38 +60,22 @@ export class PlayerComponent implements OnInit {
   itemIsSelected(event) {
     // let's update player - this should repaint the component
     this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
-      const oldId = this.player.playerId;
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
         basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
-
-      this.siblingService.playerChange({ beforeId: oldId, now: this.player });
+      // this.siblingService.playerChange(this.componentId, this.player);
     }, (error) => {
       console.log('error getting basic player info from our db');
     });
 
     // since update player is working, let's update the stats as well.
     this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
-      this.onDataUpdated.emit(playerProfile);
-      // we don't need to update our playerData, parent will do that for us.
+
       this.playerData = playerProfile;
+      this.siblingService.dataChange(this.componentId, playerProfile);
     }, (error) => {
       console.log('error getting player profile from nba api');
     });
   }
-
-  // use (ngModelChange)="onSearchChange($event)"
-  // onSearchChange() {
-  //   if (this.searchedPlayer) {
-  //     this.nbaAPIService.getSearchedPlayers(this.searchedPlayer).subscribe((allPlayers) => {
-  //       console.log(allPlayers);
-  //       this.allPlayers = allPlayers.map((elem) => {
-  //         return { id: elem['playerId'], value: elem['fullName'] };
-  //       });
-  //     }, (error) => {
-  //       console.log(error);
-  //     });
-  //   }
-  // }
 
 
 }
