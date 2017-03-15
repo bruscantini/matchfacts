@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Player } from './player.model';
 import { NbaAPIService } from '../shared/nba-api.service';
+import { SiblingService } from '../shared/sibling.service';
 
 @Component({
   selector: 'app-player',
@@ -18,7 +19,7 @@ export class PlayerComponent implements OnInit {
   dataOptGroups: String[];
 
 
-  constructor(private nbaAPIService: NbaAPIService) {
+  constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
     // this.dataOptGroups = [{'id': 'seasonTotalsRegularSeason', value: 'Regular Season'},
     //   {'id': 'careerTotalsRegularSeason', value: 'Career Reg',
     //   'seasonTotalsPostSeason',
@@ -39,6 +40,7 @@ export class PlayerComponent implements OnInit {
 
   onYearSelect(selectedValue: string) {
     console.log(selectedValue + " was selected.");
+    this.siblingService.setFilter(selectedValue);
   }
 
   // Autocomplete uses this Observable.
@@ -62,7 +64,7 @@ export class PlayerComponent implements OnInit {
     // let's update player - this should repaint the component
     this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
-        basicPlayer['lastName'], '0', basicPlayer['picture']);
+        basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
     }, (error) => {
       console.log('error getting basic player info from our db');
     });

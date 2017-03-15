@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NbaAPIService } from '../shared/nba-api.service';
 import { Player } from '../player/player.model';
+import { SiblingService } from '../shared/sibling.service';
 
 @Component({
   selector: 'app-comparison',
   templateUrl: './comparison.component.html',
-  styleUrls: ['./comparison.component.scss']
+  styleUrls: ['./comparison.component.scss'],
+  providers: [SiblingService]
 })
 export class ComparisonComponent implements OnInit {
   statFields: String[];
@@ -14,7 +16,7 @@ export class ComparisonComponent implements OnInit {
   player1Data: Object;
   player2Data: Object;
 
-  constructor(private nbaAPIService: NbaAPIService) {
+  constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
     this.statFields = [
       'gp',
       'gs',

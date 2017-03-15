@@ -19,6 +19,9 @@ const playerSchema = mongoose.Schema({
     },
     picture: {
         type: String
+    },
+    number: {
+        type: String
     }
 
 

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Player } from '../player/player.model';
+import { SiblingService } from '../shared/sibling.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-player-stats',
@@ -7,11 +9,8 @@ import { Player } from '../player/player.model';
   styleUrls: ['./player-stats.component.scss']
 })
 export class PlayerStatsComponent implements OnInit {
-  //@Input() player: Player;
 
   private _player: Player
-  private _stats: Object;
-
   @Input()
   set player(player: Player) {
     this._player = player;
@@ -20,7 +19,7 @@ export class PlayerStatsComponent implements OnInit {
     return this._player;
   }
 
-  @Input() statFields: String[];
+  private _stats: Object;
   @Input()
   set stats(stats: Object) {
     this._stats = stats;
@@ -31,15 +30,30 @@ export class PlayerStatsComponent implements OnInit {
   get stats(): Object {
     return this._stats;
   }
+
+  @Input() statFields: String[];
   selectedStats: Object;
 
+  selectedFilter: string;
+  subscription: Subscription;
 
-  constructor() {
-
+  constructor(private siblingService: SiblingService) {
+    this.subscription = this.siblingService.selectedFilter$.subscribe((selectedFilter) => {
+      this.selectedFilter = selectedFilter;
+    })
   }
 
   ngOnInit() {
-    //this.selectedStats = this.player.stats['careerTotalsRegularSeason'][0];
+
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
+  }
+
+  applySelectedFilter(selectedFilter) {
+    // change selectedStats based on selectedFlter
   }
 
 

@@ -64,7 +64,8 @@ function doAllPromises(playerPromises, continueFrom) {
                 playerId: elem.v.commonPlayerInfo[0].personId,
                 firstName: elem.v.commonPlayerInfo[0].firstName,
                 lastName: elem.v.commonPlayerInfo[0].lastName,
-                fullName: elem.v.commonPlayerInfo[0].firstName + ' ' + elem.v.commonPlayerInfo[0].lastName
+                fullName: elem.v.commonPlayerInfo[0].firstName + ' ' + elem.v.commonPlayerInfo[0].lastName,
+                number: elem.v.commonPlayerInfo[0].jersey
 
             };
             player.picture = `http://stats.nba.com/media/players/230x185/${player.playerId}.png`;
@@ -117,33 +118,52 @@ function doTheLoop(startFrom) {
 
 }
 
+let thePlayers;
+let currentIndex;
+
 function successJersey(playerObj) {
     let number = playerObj.commonPlayerInfo[0].jersey;
-    console.log('jersey for ' + player.fullName + 'is: ' + number);
+    let name = playerObj.commonPlayerInfo[0].displayFiLast;
+    Player.findOneAndUpdate({
+        'playerId': playerObj.commonPlayerInfo[0].personId
+    }, {
+        number
+    }, {
+        new: true
+    }, (err, updatedDoc) => {
+        if (err) {
+            console.log('err when saving to db');
+        }
+        console.log('updated ' + name + "'s number to " + number);
+    });
 }
 
 function failJersey(err) {
-    console.log(err);
+    console.log("error getting jersey", err);
 }
 
-function doJersey(players, start, end) {
-    getJerseys(players, start + 100, end);
+function doJersey() {
+    getJerseys(thePlayers, currentIndex, currentIndex + 100);
 }
 
-function getJerseys(players, start, end) {
-    for (let i = start; i < end; ++i) {
-        if (i === start + 100) {
-            setTimeout(doJersey(players, start, end), 10000);
-            break;
-        }
+function getJerseys(players, start, til) {
+    currentIndex = til;
+    setTimeout(doJersey, 10000);
+    for (let i = start; i < til; ++i) {
+
+        if (i >= thePlayers.length) break;
+        console.log('(' + i + ')');
+
         NBA.stats.playerInfo({
-            'PlayerID': players[i].playerId
+            'PlayerID': thePlayers[i].playerId
         }).then(successJersey).catch(failJersey);
     }
 }
 
 Player.find({}, (err, players) => {
-    getJerseys(players, 0, players.length);
+    thePlayers = players;
+    currentIndex = 0;
+    getJerseys(thePlayers, 0, 100);
 });
 
 
