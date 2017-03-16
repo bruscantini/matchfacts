@@ -4,12 +4,12 @@ import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class NbaAPIService {
 
-  apiEndpoint = 'http://localhost:3000/api/player/';
+  apiEndpoint = environment.baseEndpoint + environment.apiEndpoint;
   allPlayers: Object[];
 
   constructor(private http: Http) { }

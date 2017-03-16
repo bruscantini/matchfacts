@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   baseEndpoint: 'http://localhost.com:3000',
-  apiEndpoint: '/api'
+  apiEndpoint: '/api/player/'
 };
