@@ -5,9 +5,8 @@
   <h3>{{player.firstName}} {{player.lastName}}</h3>
   <ng-container *ngIf="playerData">
     <select name="year " id="year-selector" (change)="onYearSelect($event.target.value)">
-    <option value="" selected>Select year</option>
     <optgroup label="Career Totals">
-      <option value="careerTotalsRegularSeason 0">Regular Season</option>
+      <option value="careerTotalsRegularSeason 0" selected="">Regular Season</option>
       <option value="careerTotalsPostSeason 0">Post Season</option>
     </optgroup>
     <optgroup label="Regular Season">

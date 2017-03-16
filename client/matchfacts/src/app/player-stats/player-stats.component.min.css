@@ -1,1 +1,1 @@
-.stat-holder{width:60%;height:auto;margin:1.5vh auto;padding:1px;border-radius:10px;background-color:#595558;text-shadow:0px 1px 1px black;font-size:3rem}.winner{background-color:#257F1C}
+.stat-holder{width:60%;height:6vh;margin:1.5vh auto;padding:2px;border-radius:10px;background-color:#595558;text-shadow:0px 1px 1px black;font-size:3rem;text-align:center}@media (max-width: 640px){.stat-holder{padding:1vh}}.winner{background-color:#257F1C}

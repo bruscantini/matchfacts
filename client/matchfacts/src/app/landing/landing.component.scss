@@ -20,9 +20,22 @@ body {
   }
 }
 
-#enter-btn {}
+#enter-btn {
+  a {
+    font-size: 3rem;
+  }
+}
 
 .main-detail {
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+  }
+
   height: 70vh;
   display: flex;
   flex-direction: column;

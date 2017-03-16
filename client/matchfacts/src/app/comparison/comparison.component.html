@@ -13,13 +13,13 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-5">
+    <div class="col-xs-4 col-sm-5">
       <app-player-stats [componentId]="1" [statFields]="statFields"></app-player-stats>
     </div>
-    <div class="col-xs-2">
+    <div class="col-xs-4 col-sm-2">
       <div class="stat-field-holder" *ngFor="let field of statFields ">{{field | uppercase}}</div>
     </div>
-    <div class="col-xs-5">
+    <div class="col-xs-4 col-sm-5">
       <app-player-stats [componentId]="2" [statFields]="statFields"></app-player-stats>
     </div>
   </div>
