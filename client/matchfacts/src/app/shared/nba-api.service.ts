@@ -24,6 +24,7 @@ export class NbaAPIService {
   getSearchedPlayers(searchedPlayer: string): Observable<Array<Object>> {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     // let options = new RequestOptions({ headers: headers, body: JSON.stringify(searchedPlayer) });
+    console.log(this.apiEndpoint);
     return this.http.get(this.apiEndpoint + 'searchedPlayer/' + searchedPlayer)
       .map(this.extractData).map((obj) => {
         return obj.map((elem) => {
