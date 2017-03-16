@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+require("dotenv").config();
 
 var app = express();
 
@@ -13,7 +14,7 @@ var app = express();
 app.use(cors());
 
 // connect to the database
-mongoose.connect('mongodb://localhost/matchfacts');
+mongoose.connect(process.env.MONGODB_URI);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
