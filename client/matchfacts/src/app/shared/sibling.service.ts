@@ -56,9 +56,12 @@ export class SiblingService {
         if (this.actualPlayer1Data[field]['value'] > this.actualPlayer2Data[field]['value']) {
           this.actualPlayer1Data[field]['win'] = WINNER;
           this.actualPlayer2Data[field]['win'] = !WINNER;
-        } else {
+        } else if (this.actualPlayer1Data[field]['value'] < this.actualPlayer2Data[field]['value']) {
           this.actualPlayer2Data[field]['win'] = WINNER;
           this.actualPlayer1Data[field]['win'] = !WINNER;
+        } else {
+          this.actualPlayer1Data[field]['win'] = false;
+          this.actualPlayer2Data[field]['win'] = false;
         }
       });
       this.player1Data.next(this.actualPlayer1Data);
