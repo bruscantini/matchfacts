@@ -6,6 +6,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { environment } from '../../environments/environment';
 
+declare const aPIgetPlayerProfile: any;
+import '../../assets/nba_api.js';
+
 @Injectable()
 export class NbaAPIService {
 
@@ -33,12 +36,16 @@ export class NbaAPIService {
       }).catch(this.handleError);
   }
 
-  getPlayerProfile(playerId: string): Observable<Object> {
+  // used to return Observable<Object>
+  getPlayerProfile(playerId: string): any {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     // let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.apiEndpoint + 'profile/' + playerId)
-      .map(this.extractData).catch(this.handleError);
+    // return this.http.get(this.apiEndpoint + 'profile/' + playerId)
+    //   .map(this.extractData).catch(this.handleError);
+
+    // Let's return a promise instead as we're using the nba api directly
+    return aPIgetPlayerProfile;
 
   }
 

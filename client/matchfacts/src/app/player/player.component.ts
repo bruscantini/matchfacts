@@ -27,7 +27,15 @@ export class PlayerComponent implements OnInit {
       this.player = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
     }
 
-    this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
+    // this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
+    //   this.playerData = playerProfile;
+    //   this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
+    // }, (error) => {
+    //   console.log('error getting player profile from nba api');
+    // });
+
+    // we'll do it a different way.
+    this.nbaAPIService.getPlayerProfile(this.player.playerId)(this.player.playerId, (playerProfile) => {
       this.playerData = playerProfile;
       this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
     }, (error) => {
@@ -63,17 +71,29 @@ export class PlayerComponent implements OnInit {
     this.nbaAPIService.getPlayer(this.searchedPlayerId).subscribe((basicPlayer) => {
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
         basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
+
+      // since update player is working, let's update the stats as well.
+      // this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
+      //   this.playerData = playerProfile;
+      //   this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
+      // }, (error) => {
+      //   console.log('error getting player profile from nba api');
+      // });
+
+      // Making the calls from the browser because stats.nba doesnt like heroku
+      this.nbaAPIService.getPlayerProfile(this.player.playerId)(this.player.playerId, (playerProfile) => {
+        this.playerData = playerProfile;
+        this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
+      }, (error) => {
+        console.log('error getting player profile from nba api');
+      });
     }, (error) => {
       console.log('error getting basic player info from our db');
     });
 
-    // since update player is working, let's update the stats as well.
-    this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
-      this.playerData = playerProfile;
-      this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
-    }, (error) => {
-      console.log('error getting player profile from nba api');
-    });
+
+
+
   }
 
 
