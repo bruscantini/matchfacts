@@ -85,6 +85,7 @@ export class PlayerComponent implements OnInit {
         this.playerData = playerProfile;
         this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
       }, (error) => {
+        this.siblingService.dataChange(this.componentId, null);
         console.log('error getting player profile from nba api');
       });
     }, (error) => {

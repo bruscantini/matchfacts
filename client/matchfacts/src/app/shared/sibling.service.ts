@@ -28,15 +28,27 @@ export class SiblingService {
 
   dataChange(componentId: number, data: Object) {
     if (componentId === 1) {
-      this.actualPlayer1Data = this.convertToDisplayableForm(data);
+      if (!data) {
+        this.actualPlayer1Data = null;
+        this.player1Data.next(this.actualPlayer1Data);
+      }
+      else {
+        this.actualPlayer1Data = this.convertToDisplayableForm(data);
+      }
 
     } else {
-      this.actualPlayer2Data = this.convertToDisplayableForm(data);
+      if (!data) {
+        this.actualPlayer2Data = null;
+        this.player2Data.next(this.actualPlayer2Data);
+      }
+      else {
+        this.actualPlayer2Data = this.convertToDisplayableForm(data);
+      }
     }
     this.compareStats();
   }
 
-  // called when playerData or filter changes.
+  // called when playerData changes.
   private compareStats() {
     if (this.actualPlayer1Data && this.actualPlayer2Data) {
       // do comparison by modifying actualPlayerData and send both
@@ -47,7 +59,7 @@ export class SiblingService {
           return;
         }
 
-        // TOV exception
+        // TOV & PF exception
         let WINNER = true;
         if (field.toLowerCase() === 'tov' || field.toLowerCase() === 'pf') {
           WINNER = false;
