@@ -17,6 +17,7 @@ export class SiblingService {
 
   constructor() { }
 
+  // gives the playerData a value key and a win key for each field.
   convertToDisplayableForm(playerData) {
     const keys = Object.keys(playerData);
     let result = {};
@@ -56,6 +57,8 @@ export class SiblingService {
       fields.forEach((field) => {
         if (!(field in this.actualPlayer1Data) || !(field in this.actualPlayer2Data)) {
           console.log('somebody is missing a field');
+          // we might need to return the data with missing field. else, it doesn't
+          // get updated.
           return;
         }
 

@@ -13,11 +13,7 @@ exports.getAllPlayers = (req, res, next) => {
 
 exports.getSearchedPlayers = (req, res, next) => {
     var searchedPlayer = req.params.name;
-    console.log('get params', searchedPlayer);
     playerModel.find({
-            // $text: {
-            //     $search: text
-            // }
             fullName: {
                 $regex: new RegExp(searchedPlayer, "i")
             }

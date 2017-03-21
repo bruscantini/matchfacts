@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { Player } from './player.model';
 import { NbaAPIService } from '../shared/nba-api.service';
 import { SiblingService } from '../shared/sibling.service';
@@ -14,6 +14,7 @@ export class PlayerComponent implements OnInit {
   playerData: Object;
   searchedPlayer: string;
   searchedPlayerId: string;
+  @ViewChild('yearSelectorElem') yearSelectorElem;
 
   constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
 
@@ -22,11 +23,12 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
     if (this.componentId === 1) {
       this.player = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
-
     } else {
       this.player = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
     }
 
+    // Not using this anymore as stats.nba doesn't like requests from heroku (i guess)
+    //
     // this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
     //   this.playerData = playerProfile;
     //   this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
@@ -44,7 +46,6 @@ export class PlayerComponent implements OnInit {
   }
 
   onYearSelect(selectedValue: string) {
-    // this.siblingService.setFilter(this.componentId, selectedValue);
     const selectedYear = selectedValue.split(' ');
     this.siblingService.dataChange(this.componentId, this.playerData[selectedYear[0]][selectedYear[1]]);
   }
@@ -72,7 +73,6 @@ export class PlayerComponent implements OnInit {
       this.player = new Player(basicPlayer['playerId'], basicPlayer['firstName'],
         basicPlayer['lastName'], basicPlayer['number'] || '0', basicPlayer['picture']);
 
-      // since update player is working, let's update the stats as well.
       // this.nbaAPIService.getPlayerProfile(this.searchedPlayerId).subscribe((playerProfile) => {
       //   this.playerData = playerProfile;
       //   this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
@@ -80,10 +80,11 @@ export class PlayerComponent implements OnInit {
       //   console.log('error getting player profile from nba api');
       // });
 
-      // Making the calls from the browser because stats.nba doesnt like heroku
+      // Making the calls from the browser because stats.nba.com doesnt like heroku
       this.nbaAPIService.getPlayerProfile(this.player.playerId)(this.player.playerId, (playerProfile) => {
         this.playerData = playerProfile;
         this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
+        this.yearSelectorElem.nativeElement.value = "careerTotalsRegularSeason 0";
       }, (error) => {
         this.siblingService.dataChange(this.componentId, null);
         console.log('error getting player profile from nba api');
@@ -91,11 +92,5 @@ export class PlayerComponent implements OnInit {
     }, (error) => {
       console.log('error getting basic player info from our db');
     });
-
-
-
-
   }
-
-
 }

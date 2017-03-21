@@ -6,6 +6,8 @@ module.exports = function(app) {
 
     // catch 404 and forward to Angular
     app.all('/*', function(req, res) {
-        res.sendfile(__dirname + '/public/index.html');
+        res.sendFile('index.html', {
+            root: path.join(__dirname, '../public')
+        });
     });
 };

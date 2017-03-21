@@ -22,8 +22,6 @@ export class PlayerStatsComponent implements OnInit {
   ngOnInit() {
     if (this.componentId === 1) {
       this.playerDataSubscription = this.siblingService.changedPlayer1Data$.subscribe((playerData) => {
-        console.log('component 1 changing player data');
-        //console.log(playerData);
         this.playerStats = playerData;
       })
     } else {
