@@ -63,6 +63,8 @@ export class ComparisonComponent implements OnInit {
       'pts'
     ].reverse();
 
+    this.siblingService.setStatFields(this.statFields);
+
   }
 
   ngOnInit() {

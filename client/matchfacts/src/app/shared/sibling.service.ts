@@ -4,6 +4,7 @@ import { Subject }    from 'rxjs/Subject';
 @Injectable()
 export class SiblingService {
 
+  private statFields: String[];
   private actualPlayer1Data: Object;
   private actualPlayer2Data: Object;
 
@@ -16,6 +17,10 @@ export class SiblingService {
   changedPlayer2Data$ = this.player2Data.asObservable();
 
   constructor() { }
+
+  setStatFields(statFields: String[]) {
+    this.statFields = statFields;
+  }
 
   // gives the playerData a value key and a win key for each field.
   convertToDisplayableForm(playerData) {
@@ -55,7 +60,6 @@ export class SiblingService {
       // do comparison by modifying actualPlayerData and send both
       const fields = Object.keys(this.actualPlayer1Data);
       fields.forEach((field) => {
-        //field = field.toLowerCase();
         if (!(field in this.actualPlayer1Data) || !(field in this.actualPlayer2Data)) {
           console.log('somebody is missing a field: ' + field);
           // we might need to return the data with missing field. else, it doesn't
