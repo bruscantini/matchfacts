@@ -57,7 +57,7 @@ export class SiblingService {
       fields.forEach((field) => {
         //field = field.toLowerCase();
         if (!(field in this.actualPlayer1Data) || !(field in this.actualPlayer2Data)) {
-          console.log('somebody is missing a field');
+          console.log('somebody is missing a field: ' + field);
           // we might need to return the data with missing field. else, it doesn't
           // get updated.
           return;

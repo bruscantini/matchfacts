@@ -15,7 +15,8 @@ export class PlayerStatsComponent implements OnInit {
   playerStats: Object;
   playerDataSubscription: Subscription;
 
-  constructor(private siblingService: SiblingService, private nbaAPIService: NbaAPIService) {
+  // removed private nbaAPIService: NbaAPIService
+  constructor(private siblingService: SiblingService) {
 
   }
 
