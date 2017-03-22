@@ -17,10 +17,12 @@
       <app-player-stats [componentId]="1" [statFields]="statFields">Loading Stats</app-player-stats>
     </div>
     <div class="col-xs-4 col-sm-2">
-      <div class="stat-field-holder" *ngFor="let field of statFields ">
-        {{field | uppercase}}
-        <span class="tooltiptext">{{statAbbreviations[field]}}</span>
-      </div>
+      <ng-container *ngFor="let field of statFields">
+        <div class="stat-field-holder">
+          {{field | uppercase}}
+          <span class="tooltiptext">{{statAbbreviations[field]}}</span>
+        </div>
+      </ng-container>
     </div>
     <div class="col-xs-4 col-sm-5">
       <app-player-stats [componentId]="2" [statFields]="statFields">Loading Stats</app-player-stats>
