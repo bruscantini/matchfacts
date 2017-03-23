@@ -8,6 +8,11 @@
   text-shadow: 0px 1px 1px black;
   font-size: 3rem;
   text-align: center;
+  cursor: default;
+  -webkit-user-select:none;
+       -moz-user-select:none;
+        -ms-user-select:none;
+            user-select:none;
 
   @media (max-width: 640px){
     padding: 1vh;

@@ -10,7 +10,7 @@ import { SiblingService } from '../shared/sibling.service';
   providers: [SiblingService]
 })
 export class ComparisonComponent implements OnInit {
-  statFields: String[];
+  statFields: Array<string>;
   statAbbreviations = {
     'gp': 'Games Played',
     'gs': 'Games Started',

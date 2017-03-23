@@ -4,30 +4,40 @@ import { Subject }    from 'rxjs/Subject';
 @Injectable()
 export class SiblingService {
 
-  private statFields: String[];
   private actualPlayer1Data: Object;
   private actualPlayer2Data: Object;
+  private actualStatFields: Array<string>;
 
   // Observable sources
   private player1Data = new Subject<Object>();
   private player2Data = new Subject<Object>();
+  private statFields = new Subject<Array<string>>();
 
   // Observable streams
   changedPlayer1Data$ = this.player1Data.asObservable();
   changedPlayer2Data$ = this.player2Data.asObservable();
+  changedStatFields$ = this.statFields.asObservable();
 
   constructor() { }
 
-  setStatFields(statFields: String[]) {
-    this.statFields = statFields;
+  setStatFields(statFields: Array<string>) {
+    this.actualStatFields = statFields;
+    this.statFields.next(statFields);
   }
 
   // gives the playerData a value key and a win key for each field.
+  // also turns percentage stats into percentages
   convertToDisplayableForm(playerData) {
     const keys = Object.keys(playerData);
+    const re = /pct$/;
     let result = {};
     keys.forEach((key) => {
+      let pctMatch = re.exec(key.toLowerCase());
       result[key] = { value: playerData[key], win: false };
+      if (pctMatch) {
+        result[key].value *= 100;
+        result[key].value = Number(result[key].value.toFixed(2));
+      }
     });
     return result;
   }
@@ -58,8 +68,7 @@ export class SiblingService {
   private compareStats() {
     if (this.actualPlayer1Data && this.actualPlayer2Data) {
       // do comparison by modifying actualPlayerData and send both
-      const fields = Object.keys(this.actualPlayer1Data);
-      fields.forEach((field) => {
+      this.actualStatFields.forEach((field) => {
         if (!(field in this.actualPlayer1Data) || !(field in this.actualPlayer2Data)) {
           console.log('somebody is missing a field: ' + field);
           // we might need to return the data with missing field. else, it doesn't

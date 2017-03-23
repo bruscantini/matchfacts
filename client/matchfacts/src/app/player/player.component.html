@@ -10,10 +10,10 @@
       <option value="careerTotalsPostSeason 0">Post Season Avg.</option>
     </optgroup>
     <optgroup label="Regular Season">
-      <option *ngFor="let yearData of playerData.seasonTotalsRegularSeason; let i = index" value="seasonTotalsRegularSeason {{i}}">{{yearData.seasonId}}</option>
+      <option *ngFor="let yearData of playerData.seasonTotalsRegularSeason; let i = index" value="seasonTotalsRegularSeason {{i}}">{{yearData.seasonId}} {{yearData.teamAbbreviation}}</option>
     </optgroup>
     <optgroup label="Post Season">
-      <option *ngFor="let yearData of playerData.seasonTotalsPostSeason; let i = index" value="seasonTotalsPostSeason {{i}}">{{yearData.seasonId}}</option>
+      <option *ngFor="let yearData of playerData.seasonTotalsPostSeason; let i = index" value="seasonTotalsPostSeason {{i}}">{{yearData.seasonId}} {{yearData.teamAbbreviation}}</option>
     </optgroup>
 
     </select>

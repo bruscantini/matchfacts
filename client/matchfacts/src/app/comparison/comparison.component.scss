@@ -25,6 +25,11 @@
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 3rem;
   color: black;
+  cursor: default;
+  -webkit-user-select:none;
+       -moz-user-select:none;
+        -ms-user-select:none;
+            user-select:none;
 
   @media (max-width: 640px) {
     font-size: 2rem;

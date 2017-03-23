@@ -11,9 +11,10 @@ import { Subscription }   from 'rxjs/Subscription';
 })
 export class PlayerStatsComponent implements OnInit {
   @Input() componentId: number;
-  @Input() statFields: String[];
+  @Input() statFields: Array<string>;
   playerStats: Object;
   playerDataSubscription: Subscription;
+  statFieldsSubscription: Subscription;
 
   // removed private nbaAPIService: NbaAPIService
   constructor(private siblingService: SiblingService) {
@@ -21,6 +22,9 @@ export class PlayerStatsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.statFieldsSubscription = this.siblingService.changedStatFields$.subscribe((statFields) => {
+      this.statFields = statFields;
+    });
     if (this.componentId === 1) {
       this.playerDataSubscription = this.siblingService.changedPlayer1Data$.subscribe((playerData) => {
         this.playerStats = playerData;
@@ -35,5 +39,6 @@ export class PlayerStatsComponent implements OnInit {
   ngOnDestroy() {
     // prevent memory leak when component destroyed
     this.playerDataSubscription.unsubscribe();
+    this.statFieldsSubscription.unsubscribe();
   }
 }
