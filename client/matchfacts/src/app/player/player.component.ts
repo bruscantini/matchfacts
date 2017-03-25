@@ -37,12 +37,11 @@ export class PlayerComponent implements OnInit {
     // });
 
     // we'll do it a different way.
-    console.log("about to call getPlayerProfile. this.player.playerId = ", this.player.playerId);
     this.nbaAPIService.getPlayerProfile(this.player.playerId)(this.player.playerId, (playerProfile) => {
       this.playerData = playerProfile;
       this.siblingService.dataChange(this.componentId, this.playerData['careerTotalsRegularSeason'][0]);
     }, (error) => {
-      console.log('error getting player profile from nba api');
+      console.log('error getting player profile from nba api in playerComponent', error);
     });
   }
 
