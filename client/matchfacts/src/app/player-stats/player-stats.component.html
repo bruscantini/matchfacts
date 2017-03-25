@@ -1,10 +1,10 @@
 <ng-container *ngIf="playerStats">
   <ng-container *ngFor="let field of statFields">
-    <div *ngIf="playerStats[field] && playerStats[field]['value'] && playerStats[field]['win']" class="stat-holder winner">{{playerStats[field]['value']}}</div>
-    <div *ngIf="playerStats[field] && playerStats[field]['value'] && !playerStats[field]['win']" class="stat-holder">{{playerStats[field]['value']}}</div>
-    <div *ngIf="!playerStats[field] || !playerStats[field]['value']" class="stat-holder">N/A</div>
+    <div *ngIf="!playerStats[field] || playerStats[field]['value'] === ''" class="stat-holder">N/A</div>
+    <div *ngIf="playerStats[field] && playerStats[field]['win']" class="stat-holder winner">{{playerStats[field]['value']}}</div>
+    <div *ngIf="playerStats[field] && !playerStats[field]['win']" class="stat-holder">{{playerStats[field]['value']}}</div>
   </ng-container>
 </ng-container>
 <ng-container *ngIf="!playerStats">
-  <h3 class="no-stat-message">No PLAYER STATS</h3>
+  <h3 class="no-stat-message">NO Player Stats</h3>
 </ng-container>

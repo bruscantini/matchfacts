@@ -33,7 +33,7 @@ export class SiblingService {
     let result = {};
     keys.forEach((key) => {
       let pctMatch = re.exec(key.toLowerCase());
-      result[key] = { value: playerData[key], win: false };
+      result[key.toLowerCase()] = { value: playerData[key], win: false };
       if (pctMatch) {
         result[key].value *= 100;
         result[key].value = Number(result[key].value.toFixed(2));

@@ -17,13 +17,13 @@ export class ComparisonComponent implements OnInit {
     'min': 'Minutes',
     'fgm': 'Field Goals Made',
     'fga': 'Field Goals Attempted',
-    'fgPct': 'Field Goal %',
-    'fG3M': '3-point FG Made',
-    'fG3A': '3-point FG Attempted',
-    'fg3Pct': '3-point FG %',
+    'fgpct': 'Field Goal %',
+    'fg3m': '3-point FG Made',
+    'fg3a': '3-point FG Attempted',
+    'fg3pct': '3-point FG %',
     'ftm': 'Free Throws Made',
     'fta': 'Free Throws Attempted',
-    'ftPct': 'Free Throw %',
+    'ftpct': 'Free Throw %',
     'oreb': 'Offensive Rebounds',
     'dreb': 'Defensive Rebounds',
     'reb': 'Rebounds',
@@ -34,6 +34,35 @@ export class ComparisonComponent implements OnInit {
     'pf': 'Personal Fouls',
     'pts': 'Points'
   };
+  statCategories = [
+    {
+      name: 'Scorer',
+      fields: [
+        'fga',
+        'fgm',
+        'fgpct',
+        'fg3a',
+        'fg3m',
+        'fg3pct',
+        'ftm',
+        'fta',
+        'ftpct',
+        'pts'
+      ]
+    },
+
+    {
+      name: 'Defender',
+      fields: [
+        'reb',
+        'dreb',
+        'stl',
+        'blk'
+      ]
+    }
+  ];
+
+  private statFiler: string;
 
   // shooterStats = [ ];
 
