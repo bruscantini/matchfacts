@@ -36,6 +36,35 @@ export class ComparisonComponent implements OnInit {
   };
   statCategories = [
     {
+      id: 0,
+      name: 'All',
+      fields: [
+        'gp',
+        'gs',
+        'min',
+        'fgm',
+        'fga',
+        'fgpct',
+        'fg3m',
+        'fg3a',
+        'fg3pct',
+        'ftm',
+        'fta',
+        'ftpct',
+        'oreb',
+        'dreb',
+        'reb',
+        'ast',
+        'stl',
+        'blk',
+        'tov',
+        'pf',
+        'pts'
+      ]
+    },
+
+    {
+      id: 1,
       name: 'Scorer',
       fields: [
         'fga',
@@ -52,6 +81,7 @@ export class ComparisonComponent implements OnInit {
     },
 
     {
+      id: 2,
       name: 'Defender',
       fields: [
         'reb',
@@ -62,36 +92,18 @@ export class ComparisonComponent implements OnInit {
     }
   ];
 
-  private statFiler: string;
+  private statFilter: number;
 
-  // shooterStats = [ ];
-
+  onFilterSelect() {
+    this.statFields = this.statCategories[this.statFilter].fields;
+  }
 
   constructor(private nbaAPIService: NbaAPIService, private siblingService: SiblingService) {
-    this.statFields = [
-      'gp',
-      'gs',
-      'min',
-      'fgm',
-      'fga',
-      'fgpct',
-      'fg3m',
-      'fg3a',
-      'fg3pct',
-      'ftm',
-      'fta',
-      'ftpct',
-      'oreb',
-      'dreb',
-      'reb',
-      'ast',
-      'stl',
-      'blk',
-      'tov',
-      'pf',
-      'pts'
-    ].reverse();
-
+    this.statCategories.map((category) => {
+      category.fields.reverse();
+    });
+    this.statFilter = 0;
+    this.statFields = this.statCategories[0].fields;
     this.siblingService.setStatFields(this.statFields);
 
   }

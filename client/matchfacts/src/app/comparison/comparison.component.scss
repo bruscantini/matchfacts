@@ -3,8 +3,8 @@
   background: -o-linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("../../assets/basketball-background-13.jpg");
   background: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("../../assets/basketball-background-13.jpg");
   background-repeat: no-repeat;
-  background-position: 5px 0;
-  background-size: contain;
+  background-position: center;
+  background-size: cover;
   padding-top: 5vh;
   text-align: center;
   color: white;
@@ -13,6 +13,10 @@
 #vs-img {
   width: 60%;
   margin-top: 100px;
+}
+
+#stat-filter-selector{
+  margin-top: 70%;
 }
 
 .stat-field-holder {
