@@ -22,7 +22,7 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
     if (this.componentId === 1) {
-      this.player = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
+      this.player = new Player('2544', 'LeBron', 'James', '23', 'http://stats.nba.com/media/players/230x185/2544.png');
     } else {
       this.player = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
     }
