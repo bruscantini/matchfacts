@@ -15,18 +15,35 @@
   margin-top: 100px;
 }
 
-#stat-filter-selector{
-  margin-top: 70%;
-  font-size: 2vw;
-  span {
-  }
+#stat-filter-container{
+  margin-top: 120%;
+  width: 100%;
+  position: relative;
 
-  select {
-  }
+}
 
-  option {
-  }
+#stat-filter-heading {
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  -webkit-transform:translateX(-50%);
+      -ms-transform:translateX(-50%);
+          transform:translateX(-50%);
+}
 
+#stat-filter-select {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform:translateX(-50%);
+      -ms-transform:translateX(-50%);
+          transform:translateX(-50%);
+}
+
+.spacer {
+  height: 50px;
+  width: 100%;
+  background: transparent;
 }
 
 .stat-field-holder {

@@ -6,9 +6,10 @@
     </div>
     <div class="col-xs-2 ">
       <!-- <img id="vs-img" src="https://s3.amazonaws.com/applause-devmktg/2015/12/02/5gs8428lyf_VS.png" alt="vs."> -->
-      <div id="stat-filter-selector">
-        <span>Stat Filter</span>
-        <select [(ngModel)]="statFilter" (ngModelChange)="onFilterSelect()" id="stat-filter" name="statFilter">
+      <div id="stat-filter-container">
+        <span id="stat-filter-heading">Stat Filter</span>
+        <div class="spacer"></div>
+        <select [(ngModel)]="statFilter" (ngModelChange)="onFilterSelect()" id="stat-filter-select" name="statFilter">
           <ng-container *ngFor="let statCategory of statCategories">
             <option *ngIf="statCategory.id == 0" [ngValue]="statCategory.id">{{statCategory.name}}</option>
             <option *ngIf="statCategory.id !== 0" [ngValue]="statCategory.id">{{statCategory.name}}</option>
