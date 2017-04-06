@@ -106,3 +106,9 @@
     visibility: visible;
     opacity: 1;
 }
+
+/* for mobile iOS compatibility */
+.stat-field-holder.active .tooltiptext{
+  visibility: visible;
+  opacity: 1;
+}
