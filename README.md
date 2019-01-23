@@ -1,3 +1,2 @@
 # matchfacts
-compare basketball players
-https://matchfacts.herokuapp.com/
+compare basketball players at https://matchfacts.herokuapp.com/
