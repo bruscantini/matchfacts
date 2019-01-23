@@ -22,12 +22,12 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
     if (this.componentId === 1) {
-      this.player = new Player('893', 'Michael', 'Jordan', '23', 'http://stats.nba.com/media/players/230x185/893.png');
+      this.player = new Player('893', 'Michael', 'Jordan', '23', 'https://stats.nba.com/media/players/230x185/893.png');
     } else {
-      this.player = new Player('201939', 'Stephen', 'Curry', '30', 'http://stats.nba.com/media/players/230x185/201939.png');
+      this.player = new Player('201939', 'Stephen', 'Curry', '30', 'https://stats.nba.com/media/players/230x185/201939.png');
     }
 
-    // Not using this anymore as stats.nba doesn't like requests from heroku (i guess)
+    // Not using this anymore as stats.nba doesn't like requests from heroku
     //
     // this.nbaAPIService.getPlayerProfile(this.player.playerId).subscribe((playerProfile) => {
     //   this.playerData = playerProfile;

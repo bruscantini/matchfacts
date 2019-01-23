@@ -7,22 +7,22 @@
     "start-dev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
-    "body-parser": "~1.16.0",
+    "bcrypt": "^2.0.0",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.1",
     "debug": "~2.6.0",
     "dotenv": "^4.0.0",
     "ejs": "~2.5.5",
-    "express": "~4.14.1",
+    "express": "^4.16.4",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.24",
     "mongoose": "^4.8.6",
-    "morgan": "~1.7.0",
+    "morgan": "^1.9.1",
     "nba": "^3.2.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "^2.5.0"
   }
 }

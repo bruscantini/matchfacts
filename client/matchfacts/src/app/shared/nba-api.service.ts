@@ -23,7 +23,6 @@ export class NbaAPIService {
   }
 
   getSearchedPlayers(searchedPlayer: string): Observable<Array<Object>> {
-    console.log(this.apiEndpoint);
     return this.http.get(this.apiEndpoint + 'searchedPlayer/' + searchedPlayer)
       .map(this.extractData).map((obj) => {
         return obj.map((elem) => {
